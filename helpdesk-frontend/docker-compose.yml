@@ -1,0 +1,13 @@
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    container_name: helpdesk-frontend-env
+    volumes:
+      - .:/workspace:cached
+      - /workspace/node_modules
+      - /workspace/.next
+    command: sleep infinity
+    ports:
+      - "3001:3001"

@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: helpdesk-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: rootpassword
+      POSTGRES_DB: helpdesk_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  postgres-test:
+    image: postgres:15-alpine
+    container_name: helpdesk-db-test
+    environment:
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+      POSTGRES_DB: helpdesk_test
+    ports:
+      - '5433:5432'
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
+    container_name: helpdesk-dev-env
+    volumes:
+      - .:/workspace:cached
+      - /workspace/node_modules
+      - /workspace/dist
+    command: sleep infinity
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
