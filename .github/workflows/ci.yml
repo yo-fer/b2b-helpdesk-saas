@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: './backend/pnpm-lock.yaml'
+          cache-dependency-path: './helpdesk-backend/pnpm-lock.yaml'
       
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
@@ -71,7 +71,7 @@ jobs:
         with:
           node-version: '20'
           cache: 'pnpm'
-          cache-dependency-path: './frontend/pnpm-lock.yaml'
+          cache-dependency-path: './helpdesk-frontend/pnpm-lock.yaml'
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
